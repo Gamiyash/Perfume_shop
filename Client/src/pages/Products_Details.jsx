@@ -16,7 +16,7 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/products/${productId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`);
         setProduct(response.data);
         setSelectedSize(response.data.sizes[0]);
       } catch (error) {
@@ -49,7 +49,7 @@ export default function ProductPage() {
     }
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/products/${productId}/reviews`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}/reviews`,
         { author: "Anonymous", rating: newReview.rating, comment: newReview.comment }
       );
       console.log('Review submitted:', response.data);
@@ -59,6 +59,7 @@ export default function ProductPage() {
         ...prevProduct,
         reviews: [...prevProduct.reviews, response.data]
       }));
+      window.location.reload()
     } catch (error) {
       console.error('Error submitting review:', error);
       alert('There was an error submitting your review. Please try again.');

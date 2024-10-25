@@ -10,7 +10,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
         setProducts(response.data);
         console.log('Data retrieved:', response.data);
       } catch (error) {
