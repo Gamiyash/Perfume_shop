@@ -7,6 +7,11 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+ const alerted = localStorage.getItem('alerted') || '';
+  if (alerted != 'yes') {
+    alert("Please wait for some time to get data from backend Render is slow! I apologize for that!");
+    localStorage.setItem('alerted', 'yes');
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,9 +44,9 @@ export default function HomePage() {
             </nav>
             <div className="flex items-center space-x-4">
               <div className="relative hidden md:block">
-                <input 
-                  type="text" 
-                  placeholder="Search products..." 
+                <input
+                  type="text"
+                  placeholder="Search products..."
                   className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -50,7 +55,7 @@ export default function HomePage() {
                 <FaShoppingCart className="h-6 w-6" />
                 <span className="sr-only">Shopping Cart</span>
               </button>
-              <button 
+              <button
                 className="md:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
@@ -63,14 +68,14 @@ export default function HomePage() {
         {isMenuOpen && (
           <div className="md:hidden bg-white py-2">
             <div className="container mx-auto px-4 space-y-2">
-              <Link to="/products" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Products</Link>
-              <Link to="/collections" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Collections</Link>
-              <Link to="/about" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">About</Link>
-              <Link to="/contact" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
+              <Link to="/" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Products</Link>
+              <Link to="/" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Collections</Link>
+              <Link to="/" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">About</Link>
+              <Link to="/" className="block py-2 text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
               <div className="relative mt-2">
-                <input 
-                  type="text" 
-                  placeholder="Search products..." 
+                <input
+                  type="text"
+                  placeholder="Search products..."
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -80,7 +85,7 @@ export default function HomePage() {
         )}
       </header>
       <main className="flex-1">
-        <section className="relative w-full py-24 md:py-32 lg:py-48 bg-[url('./Perfume_Bg.webp')] bg-cover bg-center">
+        <section className="relative w-full py-24 md:py-32 lg:py-48 bg-[url('https://img.freepik.com/free-vector/perfume-bottle-black-silk-fabric-background_107791-1629.jpg?ga=GA1.1.1830527947.1710060079&semt=ais_hybrid')] bg-cover bg-center">
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
@@ -90,7 +95,7 @@ export default function HomePage() {
               <p className="text-xl sm:text-2xl text-gray-200 mb-8">
                 Explore our curated collection of exquisite fragrances and find the perfect perfume that speaks to you.
               </p>
-              <Link to="/products">
+              <Link to="/">
                 <button className="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                   Shop Now
                 </button>

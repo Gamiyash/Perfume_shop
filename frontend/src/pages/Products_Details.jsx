@@ -90,10 +90,10 @@ export default function ProductPage() {
             </Link>
             <nav className="hidden md:flex space-x-8">
               <Link to="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-              <Link to="/products" className="text-gray-600 hover:text-gray-800">Products</Link>
-              <Link to="/collections" className="text-gray-600 hover:text-gray-800">Collections</Link>
-              <Link to="/about" className="text-gray-600 hover:text-gray-800">About</Link>
-              <Link to="/contact" className="text-gray-600 hover:text-gray-800">Contact</Link>
+              <Link to="/" className="text-gray-600 hover:text-gray-800">Products</Link>
+              <Link to="/" className="text-gray-600 hover:text-gray-800">Collections</Link>
+              <Link to="/" className="text-gray-600 hover:text-gray-800">About</Link>
+              <Link to="/" className="text-gray-600 hover:text-gray-800">Contact</Link>
             </nav>
             <div className="flex items-center space-x-4">
               <input
