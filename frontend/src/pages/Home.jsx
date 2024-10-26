@@ -37,10 +37,10 @@ export default function HomePage() {
               </Link>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/products" className="text-gray-700 hover:text-gray-900 transition-colors">Products</Link>
-              <Link to="/collections" className="text-gray-700 hover:text-gray-900 transition-colors">Collections</Link>
-              <Link to="/about" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
-              <Link to="/contact" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
+              <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">Products</Link>
+              <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">Collections</Link>
+              <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">About</Link>
+              <Link to="/" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</Link>
             </nav>
             <div className="flex items-center space-x-4">
               <div className="relative hidden md:block">
