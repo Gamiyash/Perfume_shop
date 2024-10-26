@@ -6,8 +6,9 @@ import axios from 'axios';
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [Loading, setLoading] = useState(true)
 
- const alerted = localStorage.getItem('alerted') || '';
+  const alerted = localStorage.getItem('alerted') || '';
   if (alerted != 'yes') {
     alert("Please wait for some time to get data from backend Render is slow! I apologize for that!");
     localStorage.setItem('alerted', 'yes');
@@ -18,15 +19,20 @@ export default function HomePage() {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
         setProducts(response.data);
         console.log('Data retrieved:', response.data);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching data:', error.message);
+        setLoading(false)
       }
     };
 
     fetchData();
   }, []);
-
+  if (Loading) {
+    <div className='flex justify-center items-center h-screen'>Loading...</div>
+  }
   return (
+
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <header className="sticky top-0 z-50 w-full border-b bg-white shadow-md backdrop-blur supports-[backdrop-filter]:bg-white/95">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,33 +112,38 @@ export default function HomePage() {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Featured Fragrances</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {products.map((perfume) => (
-                <Link to={`/product/${perfume._id}`} key={perfume._id} className="group">
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-xl">
-                    <div className="relative pb-[100%]">
-                      <img
-                        alt={perfume.name}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        src={perfume.images[0]}
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600 transition-colors">{perfume.name}</h3>
-                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">{perfume.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xl font-bold text-gray-900">${perfume.price.toFixed(2)}</span>
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <FaStar key={i} className="w-4 h-4 text-yellow-400" />
-                          ))}
+            {products.length == 0 ? (
+              <div className='flex justify-center items-center h-screen'>Loading...</div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {products.map((perfume) => (
+                  <Link to={`/product/${perfume._id}`} key={perfume._id} className="group">
+                    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-xl">
+                      <div className="relative pb-[100%]">
+                        <img
+                          alt={perfume.name}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          src={perfume.images[0]}
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600 transition-colors">{perfume.name}</h3>
+                        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{perfume.description}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xl font-bold text-gray-900">${perfume.price.toFixed(2)}</span>
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <FaStar key={i} className="w-4 h-4 text-yellow-400" />
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  </Link>
+                ))}
+              </div>
+            )
+            }
           </div>
         </section>
       </main>
